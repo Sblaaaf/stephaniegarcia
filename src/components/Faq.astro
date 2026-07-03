@@ -1,0 +1,22 @@
+---
+interface Item {
+  q: string;
+  a: string;
+}
+interface Props {
+  items: Item[];
+}
+const { items } = Astro.props;
+---
+
+<div class="divide-y divide-sand rounded-2xl border border-sand bg-white">
+  {items.map((item) => (
+    <details class="group px-5">
+      <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-left font-medium text-ink [&::-webkit-details-marker]:hidden">
+        <span class="font-display text-lg">{item.q}</span>
+        <svg class="shrink-0 text-jade-600 transition-transform duration-200 group-open:rotate-45" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </summary>
+      <p class="pb-5 pr-8 leading-relaxed text-ink-soft" set:html={item.a} />
+    </details>
+  ))}
+</div>

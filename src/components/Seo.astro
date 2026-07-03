@@ -1,0 +1,44 @@
+---
+import { site } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Chemin de l'image OG relatif au domaine, ex: /og-image.jpg */
+  image?: string;
+  /** Empêche l'indexation (pages utilitaires) */
+  noindex?: boolean;
+}
+
+const { title, description, image = '/og-image.jpg', noindex = false } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, site.domain).href;
+const ogImage = new URL(image, site.domain).href;
+const fullTitle = title;
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={site.name + ' — ' + site.role} />
+<meta property="og:locale" content="fr_FR" />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+<!-- Géolocalisation (SEO local) -->
+<meta name="geo.region" content="FR-PDL" />
+<meta name="geo.placename" content={site.address.city} />
+<meta name="geo.position" content={`${site.address.lat};${site.address.lng}`} />
+<meta name="ICBM" content={`${site.address.lat}, ${site.address.lng}`} />

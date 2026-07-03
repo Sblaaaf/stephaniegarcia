@@ -1,0 +1,23 @@
+---
+interface Props {
+  id?: string;
+  /** Fond de section */
+  bg?: 'cream' | 'white' | 'sand' | 'jade';
+  class?: string;
+  width?: 'default' | 'narrow';
+}
+const { id, bg = 'cream', class: className = '', width = 'default' } = Astro.props;
+const bgClass = {
+  cream: 'bg-cream',
+  white: 'bg-white',
+  sand: 'bg-sand',
+  jade: 'bg-jade-50',
+}[bg];
+const maxW = width === 'narrow' ? 'max-w-3xl' : 'max-w-6xl';
+---
+
+<section id={id} class:list={[bgClass, 'py-16 sm:py-20', className]}>
+  <div class:list={['mx-auto px-5', maxW]}>
+    <slot />
+  </div>
+</section>

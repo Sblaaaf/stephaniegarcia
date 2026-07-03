@@ -1,0 +1,107 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/Section.astro';
+import Button from '../components/Button.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { site } from '../data/site';
+
+const cartes = [
+  {
+    title: 'Adulte',
+    price: `${site.tarifs.max} €`,
+    duree: '1h à 1h30',
+    desc: 'Séance complète au cabinet, méthode Ingham et entretien personnalisé.',
+    featured: true,
+  },
+  {
+    title: 'Enfant & nourrisson',
+    price: `dès ${site.tarifs.min} €`,
+    duree: 'Séance adaptée',
+    desc: 'Durée et toucher ajustés à la sensibilité des plus jeunes.',
+    featured: false,
+  },
+  {
+    title: 'À domicile',
+    price: 'Sur devis',
+    duree: '1h à 1h30',
+    desc: 'Pour les personnes à mobilité réduite, jeunes mamans, séniors ou convalescents.',
+    featured: false,
+  },
+];
+---
+
+<Layout
+  title="Tarifs & remboursement mutuelle — Réflexologie à Bouaye | Stéphanie Garcia"
+  description="Séance de réflexologie plantaire de 40 € à 60 € à Bouaye, au cabinet ou à domicile. 17 mutuelles reconnaissent la pratique et proposent un remboursement. Facture remise à chaque séance."
+>
+  <PageHeader
+    eyebrow="Tarifs"
+    title="Des tarifs clairs et transparents"
+    lead={`De ${site.tarifs.min} € à ${site.tarifs.max} € la séance selon le public et le lieu. Une facture vous est remise à chaque consultation.`}
+  />
+
+  <Section bg="cream">
+    <div class="grid gap-6 md:grid-cols-3">
+      {cartes.map((c, i) => (
+        <div
+          style={`--reveal-delay:${i * 90}ms`}
+          class:list={[
+          'reveal flex flex-col rounded-3xl border p-7 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-jade-900/10',
+          c.featured ? 'border-jade-300 bg-white shadow-xl shadow-jade-900/5 ring-1 ring-jade-200' : 'border-sand bg-white',
+        ]}>
+          {c.featured && <span class="mb-3 self-start rounded-full bg-jade-100 px-3 py-1 text-xs font-medium text-jade-700">Le plus demandé</span>}
+          <h2 class="font-display text-2xl text-ink">{c.title}</h2>
+          <p class="mt-2 font-display text-4xl font-semibold text-jade-600">{c.price}</p>
+          <p class="mt-1 text-sm text-ink-soft">{c.duree}</p>
+          <p class="mt-4 flex-1 text-sm leading-relaxed text-ink-soft">{c.desc}</p>
+          <div class="mt-6">
+            <Button href={site.resalibUrl} external variant={c.featured ? 'primary' : 'outline'} class="w-full" data-umami-event="rdv-tarifs">Prendre rendez-vous</Button>
+          </div>
+        </div>
+      ))}
+    </div>
+  </Section>
+
+  <!-- Mutuelles -->
+  <Section bg="white">
+    <div class="grid items-center gap-10 rounded-3xl border border-sand bg-cream/50 p-8 lg:grid-cols-[1fr_1.3fr] sm:p-10">
+      <div class="text-center lg:text-left">
+        <p class="font-display text-6xl font-semibold text-jade-600">{site.tarifs.mutuelles}</p>
+        <p class="mt-2 text-lg font-medium text-ink">mutuelles partenaires</p>
+      </div>
+      <div>
+        <h2 class="font-display text-2xl text-ink">Un remboursement possible</h2>
+        <p class="mt-3 leading-relaxed text-ink-soft">
+          La Sécurité sociale ne prend pas en charge la réflexologie. En revanche,
+          <strong class="text-ink">{site.tarifs.mutuelles} mutuelles</strong> reconnaissent la
+          pratique et proposent un remboursement — total ou partiel, sous forme de forfait
+          annuel ou par acte. Pensez à vérifier votre contrat : la facture remise en fin de
+          séance vous permettra d’en faire la demande.
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Modalités -->
+  <Section bg="cream" width="narrow">
+    <div class="grid gap-5 sm:grid-cols-2">
+      {[
+        ['Sur rendez-vous', 'Les consultations se font uniquement sur rendez-vous, par téléphone ou en ligne.'],
+        ['Paiement', 'Réglez en fin de séance ; une facture vous est systématiquement remise.'],
+        ['Cabinet ou domicile', 'Choisissez le lieu qui vous convient, à Bouaye ou chez vous.'],
+        ['Annulation', 'Prévenez au plus tôt en cas d’empêchement, par respect pour les autres patients.'],
+      ].map(([t, d], i) => (
+        <div
+          class="reveal rounded-2xl border border-sand bg-white p-6 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:shadow-jade-900/5"
+          style={`--reveal-delay:${i * 80}ms`}
+        >
+          <h3 class="font-medium text-ink">{t}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink-soft">{d}</p>
+        </div>
+      ))}
+    </div>
+    <div class="mt-10 text-center">
+      <Button href={site.resalibUrl} external size="lg" data-umami-event="rdv-tarifs-bas">Prendre rendez-vous</Button>
+    </div>
+  </Section>
+</Layout>

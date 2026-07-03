@@ -1,0 +1,64 @@
+---
+import { nav, site } from '../data/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-24 border-t border-sand bg-white">
+  <div class="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-4">
+    <div>
+      <img src="/logo-wordmark.svg" alt="Stéphanie Garcia" width="150" height="67" class="h-11 w-auto" />
+      <p class="mt-4 text-sm leading-relaxed text-ink-soft">
+        {site.role} certifiée, méthode Ingham. Accompagnement bien-être à Bouaye
+        et à domicile, dans la région nantaise.
+      </p>
+    </div>
+
+    <nav aria-label="Plan du site">
+      <h2 class="text-xs font-semibold uppercase tracking-wider text-ink">Navigation</h2>
+      <ul class="mt-4 space-y-2 text-sm">
+        {nav.map((item) => (
+          <li>
+            <a href={item.href} class="text-ink-soft transition-colors hover:text-jade-700">{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div>
+      <h2 class="text-xs font-semibold uppercase tracking-wider text-ink">Contact</h2>
+      <ul class="mt-4 space-y-2 text-sm text-ink-soft">
+        <li>
+          <address class="not-italic leading-relaxed">
+            {site.address.street}<br />
+            {site.address.postalCode} {site.address.city}
+          </address>
+        </li>
+        <li><a href={site.phoneHref} class="hover:text-jade-700">{site.phone}</a></li>
+        <li><a href={site.emailHref} class="hover:text-jade-700 break-all">{site.email}</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="text-xs font-semibold uppercase tracking-wider text-ink">Rendez-vous</h2>
+      <p class="mt-4 text-sm text-ink-soft">Consultations sur rendez-vous, au cabinet ou à domicile.</p>
+      <a
+        href={site.resalibUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-umami-event="rdv-footer"
+        class="mt-4 inline-flex items-center justify-center rounded-full bg-jade-500 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-jade-600"
+      >
+        Prendre rendez-vous
+      </a>
+    </div>
+  </div>
+
+  <div class="border-t border-sand">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-5 py-5 text-xs text-ink-soft sm:flex-row">
+      <p>© {year} {site.name} — Tous droits réservés · <a href="/mentions-legales/" class="hover:text-jade-700">Mentions légales</a></p>
+      <p class="text-center sm:text-right">
+        Réflexologie : discipline de bien-être complémentaire, ne se substituant pas à un avis ou traitement médical.
+      </p>
+    </div>
+  </div>
+</footer>

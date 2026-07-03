@@ -1,0 +1,60 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/Section.astro';
+import Button from '../components/Button.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+import { publics } from '../data/content';
+---
+
+<Layout
+  title="Pour qui ? Réflexologie bébé, enfant, adulte, sénior, sportif | Bouaye"
+  description="La réflexologie plantaire s’adresse à tous : nourrissons, enfants, adolescents, adultes, séniors, femmes enceintes, sportifs et personnes en situation de handicap. Stéphanie Garcia adapte chaque séance à Bouaye."
+>
+  <PageHeader
+    eyebrow="Pour qui ?"
+    title="Une réflexologie pour tous les âges"
+    lead="De la naissance au grand âge, chaque personne est accueillie avec un toucher et un rythme adaptés. Découvrez les indications selon votre profil."
+  />
+
+  <Section bg="cream">
+    <div class="flex flex-col gap-6">
+      {publics.map((p, i) => (
+        <article id={p.slug} class="reveal scroll-mt-24 overflow-hidden rounded-3xl border border-sand bg-white transition-shadow duration-300 hover:shadow-lg hover:shadow-jade-900/5">
+          <div class="grid gap-0 md:grid-cols-[1fr_1.4fr]">
+            <div class:list={['flex flex-col justify-center gap-3 p-8', i % 2 === 0 ? 'bg-jade-50' : 'bg-clay-50']}>
+              <span class:list={['inline-flex h-14 w-14 items-center justify-center rounded-2xl', i % 2 === 0 ? 'bg-jade-100 text-jade-700' : 'bg-clay-100 text-clay-600']}>
+                <Icon name={p.icon} size={28} />
+              </span>
+              <h2 class="font-display text-2xl text-ink">{p.title}</h2>
+              <p class="text-sm leading-relaxed text-ink-soft">{p.intro}</p>
+            </div>
+            <div class="p-8">
+              <h3 class="text-xs font-semibold uppercase tracking-wider text-jade-700">Indications fréquentes</h3>
+              <ul class="mt-4 grid gap-2.5 sm:grid-cols-2">
+                {p.indications.map((ind) => (
+                  <li class="flex gap-2.5 text-ink-soft">
+                    <span class="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-jade-100 text-jade-700">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                    </span>
+                    <span class="text-sm">{ind}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <p class="mx-auto mt-8 max-w-2xl text-center text-sm text-ink-soft">
+      Ces indications relèvent du bien-être et de l’accompagnement. La réflexologie ne
+      remplace pas un avis médical ni un traitement en cours.
+    </p>
+
+    <div class="mt-10 text-center">
+      <Button href={site.resalibUrl} external size="lg" data-umami-event="rdv-pour-qui">Prendre rendez-vous</Button>
+    </div>
+  </Section>
+</Layout>

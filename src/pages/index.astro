@@ -1,0 +1,310 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/Section.astro';
+import Button from '../components/Button.astro';
+import Faq from '../components/Faq.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+import { publics, seance, faq } from '../data/content';
+import piedZones from '../assets/pied-zones-reflexes.png';
+import heroImg from '../assets/reflexologie-mains-pieds.jpg';
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a.replace(/<[^>]+>/g, '') },
+  })),
+};
+
+const forces = [
+  { icon: 'heart-pulse', t: 'Méthode Ingham', d: 'La lignée pionnière de la réflexologie moderne, une cartographie précise du pied.' },
+  { icon: 'shield-check', t: 'Certifiée FFPER', d: 'Formation reconnue, secret professionnel et hygiène irréprochable.' },
+  { icon: 'home', t: 'Cabinet & domicile', d: 'À Bouaye ou chez vous, pour s’adapter à chaque situation.' },
+  { icon: 'accessibility', t: 'Tous les publics', d: 'Du nourrisson au sénior, femmes enceintes, sportifs et situations de handicap.' },
+] as const;
+
+const spheres = [
+  { icon: 'sparkles', t: 'Sphère nerveuse & émotionnelle', d: 'Stress, anxiété, charge mentale, lâcher-prise, fatigue chronique.' },
+  { icon: 'bone', t: 'Sphère musculo-squelettique', d: 'Tensions cervicales, maux de dos, névralgies, contractures.' },
+  { icon: 'droplets', t: 'Sphère digestive & fonctionnelle', d: 'Transit, sommeil, renforcement des défenses naturelles.' },
+  { icon: 'stethoscope', t: 'Accompagnement médical', d: 'Préparation mentale et physique avant ou après une intervention.' },
+] as const;
+---
+
+<Layout
+  title="Réflexologue plantaire à Bouaye (44) — Stéphanie Garcia | Méthode Ingham"
+  description="Stéphanie Garcia, réflexologue plantaire certifiée à Bouaye, près de Nantes. Méthode Ingham, au cabinet ou à domicile. Stress, sommeil, digestion, douleurs : un accompagnement bien-être pour tous. Sur rendez-vous."
+  schema={faqSchema}
+>
+  <!-- HERO -->
+  <section class="relative overflow-hidden bg-cream">
+    <div class="pointer-events-none absolute -right-32 -top-24 h-[32rem] w-[32rem] rounded-full bg-jade-100/60 blur-3xl" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute -bottom-32 -left-24 h-96 w-96 rounded-full bg-clay-100/40 blur-3xl" aria-hidden="true"></div>
+
+    <div class="relative mx-auto grid max-w-6xl items-center gap-10 px-5 py-14 sm:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:py-24">
+      <!-- Colonne texte -->
+      <div>
+        <p class="reveal inline-flex items-center gap-2 rounded-full border border-jade-200 bg-white/80 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-jade-700 backdrop-blur">
+          <span class="relative flex h-2 w-2">
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-jade-400 opacity-75"></span>
+            <span class="relative inline-flex h-2 w-2 rounded-full bg-jade-500"></span>
+          </span>
+          Réflexologie plantaire · Bouaye · Nantes
+        </p>
+
+        <h1 class="reveal mt-5 font-display text-[2.6rem] font-semibold leading-[1.05] text-ink sm:text-6xl lg:text-[4.1rem]" style="--reveal-delay:80ms">
+          Retrouver son équilibre,<br />
+          <span class="text-jade-600">au bout des pieds.</span>
+        </h1>
+
+        <p class="reveal mt-6 max-w-xl text-lg leading-relaxed text-ink-soft" style="--reveal-delay:160ms">
+          Stéphanie Garcia vous accompagne à Bouaye et à domicile avec la
+          <strong class="font-semibold text-ink">méthode Ingham</strong> : une réflexologie
+          plantaire précise et bienveillante pour apaiser le stress, améliorer le sommeil,
+          soulager les tensions et relancer les fonctions naturelles du corps.
+        </p>
+
+        <div class="reveal mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap" style="--reveal-delay:240ms">
+          <Button href={site.resalibUrl} external size="lg" data-umami-event="rdv-hero">
+            Prendre rendez-vous
+            <Icon name="arrow-right" size={18} class="transition-transform duration-300 group-hover/btn:translate-x-1" />
+          </Button>
+          <Button href="/la-reflexologie/" variant="outline" size="lg">
+            Découvrir la méthode
+          </Button>
+        </div>
+
+        <dl class="reveal mt-9 grid max-w-lg grid-cols-3 gap-4 border-t border-sand pt-6" style="--reveal-delay:320ms">
+          <div><dt class="font-display text-2xl font-semibold text-jade-600 sm:text-3xl">5,0/5</dt><dd class="mt-0.5 text-xs text-ink-soft">Avis patients</dd></div>
+          <div><dt class="font-display text-2xl font-semibold text-jade-600 sm:text-3xl">{site.tarifs.mutuelles}</dt><dd class="mt-0.5 text-xs text-ink-soft">Mutuelles partenaires</dd></div>
+          <div><dt class="font-display text-2xl font-semibold text-jade-600 sm:text-3xl">1h–1h30</dt><dd class="mt-0.5 text-xs text-ink-soft">Par séance</dd></div>
+        </dl>
+      </div>
+
+      <!-- Colonne photo -->
+      <div class="reveal relative mx-auto w-full max-w-md lg:max-w-none" style="--reveal-delay:200ms">
+        <div class="pointer-events-none absolute -inset-3 rounded-[2.75rem] bg-gradient-to-br from-jade-200/50 to-clay-100/40 blur-2xl" aria-hidden="true"></div>
+        <div class="relative overflow-hidden rounded-[2.25rem] border border-white/60 bg-white shadow-2xl shadow-jade-900/10">
+          <Image
+            src={heroImg}
+            alt="Séance de réflexologie plantaire : pressions douces sur la voûte du pied"
+            class="h-full w-full object-cover animate-slow-zoom aspect-[4/5] lg:aspect-[5/6]"
+            loading="eager"
+            widths={[480, 720, 960]}
+            sizes="(max-width: 1024px) 90vw, 480px"
+          />
+          <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-forest/20 via-transparent to-transparent" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORCES -->
+  <Section bg="white">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {forces.map((f, i) => (
+        <div
+          class="reveal group rounded-2xl border border-sand bg-cream/50 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-jade-200 hover:shadow-lg hover:shadow-jade-900/5"
+          style={`--reveal-delay:${i * 90}ms`}
+        >
+          <span class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-jade-100 text-jade-700 transition-colors duration-300 group-hover:bg-jade-500 group-hover:text-white">
+            <Icon name={f.icon} size={24} />
+          </span>
+          <h2 class="mt-4 font-display text-xl text-ink">{f.t}</h2>
+          <p class="mt-2 text-sm leading-relaxed text-ink-soft">{f.d}</p>
+        </div>
+      ))}
+    </div>
+  </Section>
+
+  <!-- APPROCHE -->
+  <Section bg="cream">
+    <div class="grid items-center gap-12 lg:grid-cols-2">
+      <div class="reveal">
+        <p class="text-sm font-semibold uppercase tracking-wider text-clay-600">La réflexologie</p>
+        <h2 class="mt-3 font-display text-3xl text-ink sm:text-4xl">Une pratique complémentaire, précise et naturelle</h2>
+        <p class="mt-5 leading-relaxed text-ink-soft">
+          Sur la voûte plantaire, les orteils et le dessus du pied, chaque glande et chaque
+          organe possède sa zone réflexe. En stimulant ces points par une pression
+          dynamique — la « reptation » du pouce —, la réflexologie envoie un signal nerveux
+          au cerveau qui relance la fonction de l’organe concerné.
+        </p>
+        <p class="mt-4 leading-relaxed text-ink-soft">
+          L’objectif : stimuler la circulation sanguine et lymphatique, dissoudre les
+          tensions accumulées et favoriser l’<strong class="text-ink">homéostasie</strong>,
+          l’état d’équilibre naturel du corps.
+        </p>
+        <div class="mt-7">
+          <Button href="/la-reflexologie/" variant="outline">
+            Histoire & méthode Ingham
+            <Icon name="arrow-right" size={16} class="transition-transform duration-300 group-hover/btn:translate-x-1" />
+          </Button>
+        </div>
+      </div>
+
+      <!-- Schéma du pied -->
+      <div class="reveal relative mx-auto max-w-sm lg:max-w-none" style="--reveal-delay:120ms">
+        <div class="pointer-events-none absolute -inset-4 rounded-[2.5rem] bg-jade-100/50 blur-2xl" aria-hidden="true"></div>
+        <div class="relative rounded-[2rem] border border-sand bg-white p-6 shadow-xl shadow-jade-900/5">
+          <Image
+            src={piedZones}
+            alt="Schéma des zones réflexes du pied en correspondance avec la colonne vertébrale"
+            class="mx-auto h-auto w-full max-w-[320px]"
+            widths={[320, 480, 640]}
+            sizes="(max-width: 640px) 80vw, 320px"
+          />
+          <p class="mt-3 text-center text-xs text-ink-soft">
+            Le pied, miroir du corps : chaque zone réflexe correspond à un organe ou une région du corps.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <ul class="mt-12 grid gap-4 sm:grid-cols-2">
+      {spheres.map((s, i) => (
+        <li
+          class="reveal flex gap-4 rounded-2xl border border-sand bg-white p-5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:shadow-jade-900/5"
+          style={`--reveal-delay:${i * 80}ms`}
+        >
+          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-clay-50 text-clay-600">
+            <Icon name={s.icon} size={22} />
+          </span>
+          <div>
+            <h3 class="font-medium text-ink">{s.t}</h3>
+            <p class="mt-1 text-sm text-ink-soft">{s.d}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <!-- POUR QUI -->
+  <Section bg="white">
+    <div class="reveal mb-10 max-w-2xl">
+      <p class="text-sm font-semibold uppercase tracking-wider text-clay-600">Pour qui ?</p>
+      <h2 class="mt-3 font-display text-3xl text-ink sm:text-4xl">Un accompagnement pour chaque âge de la vie</h2>
+      <p class="mt-4 text-ink-soft">De la naissance au grand âge, Stéphanie Garcia adapte son toucher et la durée de la séance à chaque personne.</p>
+    </div>
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {publics.map((p, i) => (
+        <a
+          href={`/pour-qui/#${p.slug}`}
+          class="reveal group flex flex-col rounded-2xl border border-sand bg-cream/40 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-jade-300 hover:bg-white hover:shadow-lg hover:shadow-jade-900/5"
+          style={`--reveal-delay:${i * 80}ms`}
+        >
+          <span class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-jade-100 text-jade-700 transition-colors duration-300 group-hover:bg-jade-500 group-hover:text-white">
+            <Icon name={p.icon} size={24} />
+          </span>
+          <h3 class="mt-4 font-display text-xl text-ink">{p.title}</h3>
+          <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-soft">{p.intro}</p>
+          <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-jade-700">
+            En savoir plus
+            <Icon name="arrow-right" size={15} class="transition-transform duration-300 group-hover:translate-x-1" />
+          </span>
+        </a>
+      ))}
+    </div>
+  </Section>
+
+  <!-- SEANCE -->
+  <Section bg="jade">
+    <div class="reveal mb-10 max-w-2xl">
+      <p class="text-sm font-semibold uppercase tracking-wider text-clay-600">Le déroulé</p>
+      <h2 class="mt-3 font-display text-3xl text-ink sm:text-4xl">Une séance en cinq temps</h2>
+    </div>
+    <ol class="grid gap-5 md:grid-cols-2 lg:grid-cols-5">
+      {seance.map((s, i) => (
+        <li
+          class="reveal rounded-2xl border border-jade-200 bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-jade-900/5"
+          style={`--reveal-delay:${i * 90}ms`}
+        >
+          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-jade-500 font-display text-lg font-semibold text-white shadow-md shadow-jade-900/15">{s.n}</span>
+          <h3 class="mt-3 font-medium text-ink">{s.title}</h3>
+          <p class="mt-1.5 text-sm leading-relaxed text-ink-soft">{s.text}</p>
+        </li>
+      ))}
+    </ol>
+    <div class="mt-8">
+      <Button href="/la-seance/" variant="outline">
+        Tout savoir sur la séance
+        <Icon name="arrow-right" size={16} class="transition-transform duration-300 group-hover/btn:translate-x-1" />
+      </Button>
+    </div>
+  </Section>
+
+  <!-- AVIS -->
+  <Section bg="white">
+    <div class="reveal mb-10 flex flex-wrap items-end justify-between gap-4">
+      <div class="max-w-2xl">
+        <p class="text-sm font-semibold uppercase tracking-wider text-clay-600">Témoignages</p>
+        <h2 class="mt-3 font-display text-3xl text-ink sm:text-4xl">La confiance de ses patients</h2>
+      </div>
+      <div class="flex items-center gap-2 text-clay-400" aria-label="Note moyenne 5 sur 5">
+        {Array.from({ length: 5 }).map(() => (
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.3l-6.2 3.7 1.6-7-5.4-4.7 7.1-.6L12 2l2.9 6.7 7.1.6-5.4 4.7 1.6 7z"/></svg>
+        ))}
+        <span class="ml-1 font-medium text-ink">5,0/5</span>
+      </div>
+    </div>
+    <div class="grid gap-6 md:grid-cols-3">
+      {[
+        ['Un mal de dos aigu qu’aucun professionnel n’avait su soulager. Stéphanie a trouvé l’origine du blocage dès la première séance : un soulagement spectaculaire.', 'Patiente'],
+        ['Je suis suivie depuis des années, et aujourd’hui c’est toute ma famille — mon mari, mes enfants — qui vient la voir. Une praticienne de confiance.', 'Elsa'],
+        ['D’une très grande douceur et à l’écoute. Même mon enfant de 3 ans était parfaitement à l’aise. Bienveillance absolue.', 'Patiente'],
+      ].map(([quote, author], i) => (
+        <figure
+          class="reveal relative flex flex-col rounded-2xl border border-sand bg-cream/40 p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-jade-900/5"
+          style={`--reveal-delay:${i * 90}ms`}
+        >
+          <Icon name="quote" size={30} class="text-jade-200" />
+          <blockquote class="mt-3 flex-1 leading-relaxed text-ink">« {quote} »</blockquote>
+          <figcaption class="mt-4 flex items-center gap-2 text-sm font-medium text-ink-soft">
+            <span class="flex gap-0.5 text-clay-400" aria-hidden="true">
+              {Array.from({ length: 5 }).map(() => (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.3l-6.2 3.7 1.6-7-5.4-4.7 7.1-.6L12 2l2.9 6.7 7.1.6-5.4 4.7 1.6 7z"/></svg>
+              ))}
+            </span>
+            — {author}
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </Section>
+
+  <!-- FAQ -->
+  <Section bg="cream" width="narrow">
+    <div class="reveal mb-10 text-center">
+      <p class="text-sm font-semibold uppercase tracking-wider text-clay-600">Questions fréquentes</p>
+      <h2 class="mt-3 font-display text-3xl text-ink sm:text-4xl">Vous vous demandez…</h2>
+    </div>
+    <div class="reveal">
+      <Faq items={faq} />
+    </div>
+  </Section>
+
+  <!-- CTA FINAL -->
+  <section class="relative overflow-hidden bg-forest">
+    <div class="pointer-events-none absolute -left-20 -top-24 h-80 w-80 rounded-full bg-jade-500/20 blur-3xl" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute -bottom-24 -right-16 h-80 w-80 rounded-full bg-clay-500/15 blur-3xl" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-4xl px-5 py-16 text-center sm:py-24">
+      <h2 class="reveal font-display text-3xl font-semibold text-white sm:text-4xl">Prête à prendre soin de vous ?</h2>
+      <p class="reveal mx-auto mt-4 max-w-xl text-jade-50/90" style="--reveal-delay:80ms">
+        Réservez votre séance à Bouaye ou à domicile. Consultations uniquement sur rendez-vous.
+      </p>
+      <div class="reveal mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap" style="--reveal-delay:160ms">
+        <Button href={site.resalibUrl} external size="lg" variant="ghost" class="bg-white text-jade-700 shadow-lg shadow-black/20 hover:bg-jade-50" data-umami-event="rdv-cta-final">
+          Prendre rendez-vous
+          <Icon name="arrow-right" size={18} class="transition-transform duration-300 group-hover/btn:translate-x-1" />
+        </Button>
+        <a href={site.phoneHref} data-umami-event="tel-cta-final" class="inline-flex items-center justify-center gap-2 rounded-full border border-white/40 px-7 py-3.5 text-base font-medium text-white transition-colors hover:bg-white/10">
+          <Icon name="phone" size={18} />
+          {site.phone}
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

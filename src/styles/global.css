@@ -1,0 +1,117 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------------
+   Charte Stéphanie Garcia — Réflexologie plantaire
+   Vert jade issu du logo (#3DBA84) enrichi d'un accent terracotta chaud
+   pour le mouvement et la profondeur. Bases écrues douces, nature, bien-être.
+--------------------------------------------------------------------------- */
+@theme {
+  /* Vert de marque + déclinaisons (le 700 sert au texte pour le contraste AA) */
+  --color-jade-50: #edf8f2;
+  --color-jade-100: #d6f0e2;
+  --color-jade-200: #aee2c8;
+  --color-jade-300: #7bcfa6;
+  --color-jade-400: #4ec08c;
+  --color-jade-500: #3dba84;
+  --color-jade-600: #2f9d6d;
+  --color-jade-700: #297f5a;
+  --color-jade-800: #216349;
+  --color-jade-900: #14402f;
+
+  /* Vert profond forêt : sections sombres, dégradés du hero */
+  --color-forest: #123328;
+
+  /* Accent terracotta chaud : rythme visuel, survols, détails */
+  --color-clay-50: #fbf1ea;
+  --color-clay-100: #f6e0d0;
+  --color-clay-200: #eec3a8;
+  --color-clay-300: #e2a37e;
+  --color-clay-400: #d5835a;
+  --color-clay-500: #c56f47;
+  --color-clay-600: #a95736;
+  --color-clay-700: #86452d;
+
+  /* Neutres chauds : anthracite du logo + écrus */
+  --color-ink: #2c2925;
+  --color-ink-soft: #5b544d;
+  --color-cream: #faf6f0;
+  --color-sand: #efe7da;
+
+  /* Polices auto-hébergées (importées dans le Layout) */
+  --font-sans: 'DM Sans Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Google Sans Variable', ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background-color: var(--color-cream);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  /* Google Sans à sa graisse maximale (700) + axe GRAD poussé pour l'épaisseur la plus forte */
+  font-weight: 700;
+  font-variation-settings: 'wght' 700, 'GRAD' 200, 'opsz' 18;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+}
+
+/* ---------------------------------------------------------------------------
+   Mouvement — animations douces et révélations au défilement
+--------------------------------------------------------------------------- */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+@keyframes slow-zoom {
+  from { transform: scale(1.08); }
+  to   { transform: scale(1); }
+}
+
+/* Révélation progressive au scroll.
+   Le .js n'est ajouté que si JavaScript est actif → sans JS, tout reste visible. */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.animate-floaty { animation: floaty 6s ease-in-out infinite; }
+.animate-slow-zoom { animation: slow-zoom 12s ease-out both; }
+
+/* Respecte les utilisateurs sensibles au mouvement */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .js .reveal { opacity: 1; transform: none; }
+}
+
+/* Focus visible cohérent et accessible */
+:focus-visible {
+  outline: 2px solid var(--color-jade-600);
+  outline-offset: 2px;
+  border-radius: 2px;
+}

@@ -1,0 +1,163 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/Section.astro';
+import Button from '../components/Button.astro';
+import { site } from '../data/site';
+import egypte from '../assets/reflexologie-egypte.jpg';
+import fitzgerald from '../assets/william-fitzgerald.jpg';
+import ingham from '../assets/eunice-ingham.png';
+import piedZones from '../assets/pied-zones-reflexes.png';
+import PageHeader from '../components/PageHeader.astro';
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'La réflexologie plantaire et la méthode Ingham',
+  about: ['Réflexologie plantaire', 'Méthode Ingham', 'Eunice Ingham', 'William Fitzgerald'],
+  author: { '@type': 'Person', name: site.name },
+  publisher: { '@type': 'Organization', name: site.name },
+};
+---
+
+<Layout
+  title="La réflexologie plantaire & la méthode Ingham | Stéphanie Garcia"
+  description="Origines égyptiennes, travaux de William Fitzgerald et méthode d’Eunice Ingham : découvrez l’histoire et les principes de la réflexologie plantaire pratiquée à Bouaye par Stéphanie Garcia."
+  schema={articleSchema}
+>
+  <PageHeader
+    eyebrow="La réflexologie"
+    title="Une science ancienne, une méthode précise"
+    lead="Des temples égyptiens à la cartographie moderne d’Eunice Ingham, la réflexologie plantaire s’appuie sur une idée simple : le pied est le miroir du corps."
+  />
+
+  <!-- Origines -->
+  <Section bg="cream">
+    <div class="grid items-center gap-10 lg:grid-cols-2">
+      <div class="overflow-hidden rounded-3xl border border-sand bg-white">
+        <Image src={egypte} alt="Fresque égyptienne antique représentant des soins des mains et des pieds, aux origines de la réflexologie" class="h-full w-full object-cover" widths={[480, 768, 1000]} sizes="(max-width: 1024px) 100vw, 500px" />
+      </div>
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-wider text-clay-600">Aux origines</p>
+        <h2 class="mt-3 font-display text-3xl text-ink">Une pratique millénaire</h2>
+        <p class="mt-5 leading-relaxed text-ink-soft">
+          La stimulation des zones du pied traverse les civilisations. La plus ancienne
+          trace connue remonte à l’Égypte antique : une fresque de la tombe d’Ânkhmahor,
+          à Saqqarah (vers 2330 av. J.-C.), représente des praticiens soignant les mains
+          et les pieds de leurs patients.
+        </p>
+        <p class="mt-4 leading-relaxed text-ink-soft">
+          Ce savoir intuitif, présent aussi en Chine et chez de nombreux peuples,
+          ne deviendra une méthode structurée qu’au XX<sup>e</sup> siècle, aux États-Unis.
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Fitzgerald & Ingham -->
+  <Section bg="white">
+    <div class="mb-12 max-w-2xl">
+      <p class="text-sm font-semibold uppercase tracking-wider text-clay-600">Les pionniers</p>
+      <h2 class="mt-3 font-display text-3xl text-ink sm:text-4xl">De la théorie des zones à la méthode Ingham</h2>
+    </div>
+    <div class="grid gap-8 md:grid-cols-2">
+      <article class="reveal flex flex-col overflow-hidden rounded-3xl border border-sand bg-cream/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-jade-900/5">
+        <div class="aspect-[4/3] overflow-hidden bg-sand">
+          <Image src={fitzgerald} alt="Portrait du docteur William Fitzgerald, fondateur de la thérapie des zones" class="h-full w-full object-cover" widths={[400, 600]} sizes="(max-width: 768px) 100vw, 400px" />
+        </div>
+        <div class="p-6">
+          <h3 class="font-display text-2xl text-ink">Dr William Fitzgerald</h3>
+          <p class="text-sm font-medium text-jade-700">La thérapie des zones · 1913</p>
+          <p class="mt-3 leading-relaxed text-ink-soft">
+            Médecin ORL américain, Fitzgerald observe qu’une pression exercée sur certaines
+            parties du corps produit un effet d’anesthésie à distance. Il divise le corps en
+            dix zones longitudinales : les fondations de la réflexologie moderne étaient posées.
+          </p>
+        </div>
+      </article>
+
+      <article class="reveal flex flex-col overflow-hidden rounded-3xl border border-sand bg-cream/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-jade-900/5">
+        <div class="aspect-[4/3] overflow-hidden bg-sand">
+          <Image src={ingham} alt="Portrait d’Eunice Ingham, fondatrice de la méthode de réflexologie plantaire moderne" class="h-full w-full object-cover" widths={[400, 600]} sizes="(max-width: 768px) 100vw, 400px" />
+        </div>
+        <div class="p-6">
+          <h3 class="font-display text-2xl text-ink">Eunice Ingham</h3>
+          <p class="text-sm font-medium text-jade-700">La méthode Ingham · années 1930</p>
+          <p class="mt-3 leading-relaxed text-ink-soft">
+            Kinésithérapeute américaine, Eunice Ingham concentre le travail sur les pieds et
+            en dresse une cartographie précise, reliant chaque zone réflexe à un organe.
+            Elle met au point la technique de « reptation » du pouce. C’est la méthode que
+            Stéphanie Garcia pratique aujourd’hui, dans sa stricte lignée.
+          </p>
+        </div>
+      </article>
+    </div>
+
+    <!-- PDF -->
+    <div class="mt-10 flex flex-col items-start gap-5 rounded-3xl border border-jade-200 bg-jade-50 p-7 sm:flex-row sm:items-center sm:justify-between">
+      <div class="flex items-start gap-4">
+        <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-jade-500 text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </span>
+        <div>
+          <h3 class="font-display text-xl text-ink">« Ce que les pieds peuvent raconter »</h3>
+          <p class="mt-1 text-sm text-ink-soft">L’ouvrage de référence d’Eunice Ingham, à consulter et télécharger.</p>
+        </div>
+      </div>
+      <Button href="/documents/ingham-reflexologie.pdf" external variant="primary" data-umami-event="download-pdf-ingham">
+        Télécharger le PDF
+      </Button>
+    </div>
+  </Section>
+
+  <!-- Principe -->
+  <Section bg="cream">
+    <div class="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+      <div class="rounded-3xl border border-sand bg-white p-6">
+        <Image src={piedZones} alt="Schéma détaillé des zones réflexes du pied correspondant à la colonne vertébrale : région cérébrale, cervicales, dorsales, lombaires, sacrum, coccyx" class="mx-auto h-auto w-full max-w-[340px]" widths={[340, 520, 680]} sizes="(max-width: 1024px) 80vw, 340px" />
+      </div>
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-wider text-clay-600">Le principe</p>
+        <h2 class="mt-3 font-display text-3xl text-ink sm:text-4xl">Le pied, une carte du corps entier</h2>
+        <p class="mt-5 leading-relaxed text-ink-soft">
+          Les deux pieds reproduisent l’ensemble du corps humain. La colonne vertébrale, par
+          exemple, se lit tout le long du bord interne du pied : les cervicales sous le gros
+          orteil, puis les dorsales, les lombaires, le sacrum et le coccyx vers le talon.
+        </p>
+        <ul class="mt-6 space-y-3">
+          {[
+            'Repérer les zones tendues ou les petits cristaux sous la peau',
+            'Appliquer une pression dynamique adaptée pour les dissoudre',
+            'Relancer la circulation sanguine et lymphatique',
+            'Envoyer un signal nerveux vers l’organe correspondant',
+            'Favoriser l’homéostasie, l’équilibre naturel du corps',
+          ].map((t) => (
+            <li class="flex gap-3 text-ink-soft">
+              <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-jade-100 text-jade-700">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              <span>{t}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Cadre déontologique -->
+  <Section bg="white" width="narrow">
+    <div class="rounded-3xl border border-sand bg-cream/50 p-8 text-center">
+      <h2 class="font-display text-2xl text-ink">Un cadre clair et rassurant</h2>
+      <p class="mt-4 leading-relaxed text-ink-soft">
+        Stéphanie Garcia est membre de la <strong class="text-ink">FFPER</strong>
+        (Fédération Francophone des Praticiens et Enseignants en Réflexologie) : formation
+        reconnue, secret professionnel et hygiène irréprochable. La réflexologie est une
+        discipline <strong class="text-ink">complémentaire</strong> : elle ne pose aucun
+        diagnostic, ne prescrit aucun médicament et ne remplace jamais un traitement médical.
+      </p>
+      <div class="mt-7">
+        <Button href={site.resalibUrl} external size="lg" data-umami-event="rdv-reflexologie">Prendre rendez-vous</Button>
+      </div>
+    </div>
+  </Section>
+</Layout>

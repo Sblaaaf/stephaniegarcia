@@ -1,0 +1,65 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/Section.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { site } from '../data/site';
+---
+
+<Layout
+  title="Mentions légales — Stéphanie Garcia, réflexologue à Bouaye"
+  description="Mentions légales du site de Stéphanie Garcia, réflexologue plantaire à Bouaye."
+  noindex
+>
+  <PageHeader eyebrow="Informations" title="Mentions légales" />
+
+  <Section bg="cream" width="narrow">
+    <div class="space-y-8 text-ink-soft [&_h2]:font-display [&_h2]:text-xl [&_h2]:text-ink [&_p]:mt-2 [&_p]:leading-relaxed">
+      <div>
+        <h2>Éditeur du site</h2>
+        <p>
+          {site.name}, {site.role} — entreprise individuelle.<br />
+          {site.address.street}, {site.address.postalCode} {site.address.city}, France.<br />
+          Téléphone : {site.phone} — E-mail : {site.email}
+        </p>
+        <p class="text-sm italic">
+          À compléter : n° SIRET, statut juridique, éventuel n° de TVA.
+        </p>
+      </div>
+
+      <div>
+        <h2>Hébergement</h2>
+        <p class="text-sm italic">
+          À compléter selon l’hébergeur retenu (ex. Cloudflare, Inc. — 101 Townsend St,
+          San Francisco, CA 94107, USA).
+        </p>
+      </div>
+
+      <div>
+        <h2>Propriété intellectuelle</h2>
+        <p>
+          L’ensemble des contenus de ce site (textes, images, logo) est protégé. Toute
+          reproduction, même partielle, est interdite sans autorisation préalable.
+        </p>
+      </div>
+
+      <div>
+        <h2>Données personnelles</h2>
+        <p>
+          Ce site ne collecte aucune donnée personnelle via un formulaire hébergé. La prise
+          de rendez-vous en ligne est assurée par Resalib, soumis à sa propre politique de
+          confidentialité. Aucun cookie publicitaire n’est déposé. La mesure d’audience, si
+          activée, est réalisée de manière anonyme et respectueuse de la vie privée.
+        </p>
+      </div>
+
+      <div>
+        <h2>Nature de la pratique</h2>
+        <p>
+          La réflexologie plantaire est une discipline de bien-être complémentaire. Elle ne
+          constitue en aucun cas un acte médical, ne pose aucun diagnostic et ne se substitue
+          pas à un avis ou à un traitement médical.
+        </p>
+      </div>
+    </div>
+  </Section>
+</Layout>

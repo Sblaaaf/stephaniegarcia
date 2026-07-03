@@ -1,0 +1,85 @@
+---
+import { nav, site } from '../data/site';
+import Button from './Button.astro';
+
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path.startsWith(href);
+---
+
+<header class="sticky top-0 z-40 border-b border-sand/70 bg-cream/85 backdrop-blur-md">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3" aria-label="Navigation principale">
+    <a href="/" class="group flex flex-col leading-none" aria-label="Accueil — Stéphanie Garcia">
+      <img
+        src="/logo-wordmark.svg"
+        alt="Stéphanie Garcia"
+        width="130"
+        height="58"
+        class="h-11 w-auto transition-transform duration-300 group-hover:scale-[1.03] sm:h-12"
+      />
+      <span class="mt-1.5 pl-0.5 text-[11px] font-medium uppercase tracking-[0.22em] text-jade-700">{site.role}</span>
+    </a>
+
+    <!-- Menu desktop -->
+    <ul class="hidden items-center gap-1 lg:flex">
+      {nav.filter((n) => n.href !== '/').map((item) => (
+        <li>
+          <a
+            href={item.href}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+            class:list={[
+              'rounded-full px-3 py-2 text-sm transition-colors',
+              isActive(item.href)
+                ? 'text-jade-700 font-medium'
+                : 'text-ink-soft hover:text-ink',
+            ]}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="hidden lg:block">
+      <Button href={site.resalibUrl} external size="md" data-umami-event="rdv-header">
+        Prendre rendez-vous
+      </Button>
+    </div>
+
+    <!-- Menu mobile (détails natif, zéro JS) -->
+    <details class="group relative lg:hidden">
+      <summary class="flex cursor-pointer items-center rounded-full p-2 text-ink [&::-webkit-details-marker]:hidden" aria-label="Ouvrir le menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="4" y1="7" x2="20" y2="7" class="group-open:hidden" />
+          <line x1="4" y1="12" x2="20" y2="12" class="group-open:hidden" />
+          <line x1="4" y1="17" x2="20" y2="17" class="group-open:hidden" />
+          <line x1="6" y1="6" x2="18" y2="18" class="hidden group-open:block" />
+          <line x1="6" y1="18" x2="18" y2="6" class="hidden group-open:block" />
+        </svg>
+      </summary>
+      <div class="absolute right-0 mt-3 w-60 origin-top-right rounded-2xl border border-sand bg-white p-2 shadow-xl group-open:animate-[fade-up_0.2s_ease-out]">
+        <ul class="flex flex-col">
+          {nav.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+                class:list={[
+                  'block rounded-xl px-4 py-2.5 text-sm',
+                  isActive(item.href) ? 'bg-jade-50 text-jade-700 font-medium' : 'text-ink-soft hover:bg-cream',
+                ]}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <div class="p-2">
+          <Button href={site.resalibUrl} external class="w-full" data-umami-event="rdv-menu-mobile">
+            Prendre rendez-vous
+          </Button>
+        </div>
+      </div>
+    </details>
+  </nav>
+</header>

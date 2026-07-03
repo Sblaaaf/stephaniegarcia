@@ -1,0 +1,123 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/Section.astro';
+import Button from '../components/Button.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+import ecap from '../assets/ecap-nantes.png';
+import ffper from '../assets/ffper.jpg';
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  jobTitle: 'Réflexologue plantaire',
+  description: 'Réflexologue plantaire certifiée, méthode Ingham, membre de la FFPER, exerçant à Bouaye.',
+  memberOf: { '@type': 'Organization', name: 'FFPER — Fédération Francophone des Praticiens et Enseignants en Réflexologie' },
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.address.street,
+    addressLocality: site.address.city,
+    postalCode: site.address.postalCode,
+    addressCountry: 'FR',
+  },
+  url: site.domain,
+};
+
+const valeurs = [
+  ['Douceur', 'Un toucher enveloppant et rassurant, salué par tous ses patients, des nourrissons aux séniors.'],
+  ['Écoute', 'Chaque séance commence par un vrai temps d’échange pour comprendre vos besoins.'],
+  ['Inclusion', 'Un accueil pensé pour tous, y compris les publics souvent délaissés en situation de handicap.'],
+  ['Rigueur', 'La stricte lignée de la méthode Ingham et le cadre déontologique de la FFPER.'],
+];
+---
+
+<Layout
+  title="À propos de Stéphanie Garcia — Réflexologue plantaire à Bouaye"
+  description="Réflexologue plantaire certifiée et membre de la FFPER, Stéphanie Garcia pratique la méthode Ingham à Bouaye. Découvrez son approche, ses valeurs et son engagement pour un accompagnement bienveillant et inclusif."
+  schema={personSchema}
+>
+  <PageHeader
+    eyebrow="À propos"
+    title="Stéphanie Garcia"
+    lead="Réflexologue plantaire à Bouaye, dans la stricte lignée de la méthode Ingham, au service de votre bien-être."
+  />
+
+  <Section bg="cream">
+    <div class="mx-auto max-w-3xl">
+      <div class="prose-reflexo space-y-5 text-lg leading-relaxed text-ink-soft">
+        <p>
+          Installée à Bouaye, aux portes de Nantes et du lac de Grand-Lieu, Stéphanie Garcia
+          a fait de la réflexologie plantaire bien plus qu’un métier : une manière d’accompagner
+          chacun vers son équilibre, avec douceur et présence.
+        </p>
+        <p>
+          Sa pratique s’inscrit dans la <strong class="text-ink">méthode Ingham</strong>, pionnière
+          de la réflexologie moderne. Loin d’un simple massage, elle propose un accompagnement
+          complet : un temps d’écoute, un travail réflexe précis, et un moment de partage.
+        </p>
+        <p>
+          Ce qui la distingue, c’est sa capacité à s’adapter à chacun — du nourrisson au sénior,
+          des sportifs aux femmes enceintes — et son engagement à accueillir les personnes en
+          situation de handicap, un public trop souvent laissé de côté.
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Valeurs -->
+  <Section bg="white">
+    <div class="reveal mb-10 text-center">
+      <p class="text-sm font-semibold uppercase tracking-wider text-clay-600">Son approche</p>
+      <h2 class="mt-3 font-display text-3xl text-ink sm:text-4xl">Quatre valeurs au cœur de sa pratique</h2>
+    </div>
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {valeurs.map(([t, d], i) => (
+        <div
+          class="reveal rounded-2xl border border-sand bg-cream/40 p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-jade-900/5"
+          style={`--reveal-delay:${i * 80}ms`}
+        >
+          <h3 class="font-display text-xl text-ink">{t}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink-soft">{d}</p>
+        </div>
+      ))}
+    </div>
+  </Section>
+
+  <!-- Formation & affiliation -->
+  <Section bg="jade" width="narrow">
+    <div class="reveal overflow-hidden rounded-3xl border border-jade-200 bg-white">
+      <div class="grid gap-8 p-8 sm:p-10 md:grid-cols-2 md:items-center">
+        <div>
+          <span class="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-jade-100 text-jade-700">
+            <Icon name="shield-check" size={28} />
+          </span>
+          <h2 class="mt-4 font-display text-2xl text-ink">Une formation solide, une pratique encadrée</h2>
+          <p class="mt-3 leading-relaxed text-ink-soft">
+            Formée au centre <strong class="text-ink">ECAP de Nantes</strong> et membre de la
+            <strong class="text-ink">FFPER</strong> — Fédération Francophone des Praticiens et
+            Enseignants en Réflexologie —, Stéphanie exerce dans un cadre validé par des examens
+            d’anatomie et de physiologie, le respect du secret professionnel et une hygiène
+            irréprochable du cabinet et du matériel.
+          </p>
+        </div>
+        <div class="flex flex-col gap-4">
+          <div class="flex items-center justify-center rounded-2xl border border-sand bg-cream/50 p-6">
+            <Image src={ecap} alt="ECAP de Nantes — centre de formation en réflexologie" class="h-14 w-auto" widths={[200, 320]} />
+          </div>
+          <div class="flex items-center justify-center rounded-2xl border border-sand bg-cream/50 p-6">
+            <Image src={ffper} alt="Fédération Francophone des Praticiens et Enseignants en Réflexologie" class="h-12 w-auto" widths={[240, 400]} />
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-sand px-8 py-6 text-center sm:px-10">
+        <Button href={site.resalibUrl} external size="lg" data-umami-event="rdv-a-propos">
+          Prendre rendez-vous
+          <Icon name="arrow-right" size={18} class="transition-transform duration-300 group-hover/btn:translate-x-1" />
+        </Button>
+      </div>
+    </div>
+  </Section>
+</Layout>

@@ -1,0 +1,122 @@
+---
+import '@fontsource-variable/dm-sans';
+import '@fontsource-variable/google-sans/full.css';
+import '../styles/global.css';
+import { site } from '../data/site';
+import Seo from '../components/Seo.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileCta from '../components/MobileCta.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  noindex?: boolean;
+  /** JSON-LD additionnel spécifique à la page (objet sérialisable) */
+  schema?: object | object[];
+}
+
+const { title, description, image, noindex, schema } = Astro.props;
+
+// Données structurées LocalBusiness — présentes sur toutes les pages.
+const localBusiness = {
+  '@context': 'https://schema.org',
+  '@type': ['HealthAndBeautyBusiness', 'MedicalBusiness'],
+  '@id': site.domain + '/#business',
+  name: `${site.name} — ${site.role}`,
+  description:
+    'Réflexologue plantaire certifiée à Bouaye (44), méthode Ingham. Accompagnement bien-être au cabinet et à domicile pour nourrissons, enfants, adultes, séniors, femmes enceintes et sportifs.',
+  url: site.domain,
+  telephone: site.phoneHref.replace('tel:', ''),
+  email: site.email,
+  image: site.domain + '/icon-512.png',
+  logo: site.domain + '/icon-512.png',
+  priceRange: `${site.tarifs.min}–${site.tarifs.max} €`,
+  currenciesAccepted: 'EUR',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.address.street,
+    postalCode: site.address.postalCode,
+    addressLocality: site.address.city,
+    addressRegion: site.address.region,
+    addressCountry: 'FR',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: site.address.lat,
+    longitude: site.address.lng,
+  },
+  areaServed: ['Bouaye', 'Nantes', 'Pays de Retz', 'Grand-Lieu', 'Loire-Atlantique'],
+  knowsAbout: ['Réflexologie plantaire', 'Méthode Ingham', 'Médecine douce', 'Bien-être'],
+  sameAs: [site.resalibUrl],
+};
+
+const schemas = [localBusiness, ...(schema ? (Array.isArray(schema) ? schema : [schema]) : [])];
+const umamiActive = site.umami.websiteId.length > 0;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/icon-512.png" sizes="512x512" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="theme-color" content="#3dba84" />
+
+    <Seo title={title} description={description} image={image} noindex={noindex} />
+
+    {schemas.map((s) => (
+      <script type="application/ld+json" set:html={JSON.stringify(s)} />
+    ))}
+
+    {umamiActive && (
+      <script
+        defer
+        src={site.umami.scriptUrl}
+        data-website-id={site.umami.websiteId}
+      />
+    )}
+  </head>
+  <body class="min-h-screen antialiased">
+    <a href="#contenu" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-jade-600 focus:px-4 focus:py-2 focus:text-white">
+      Aller au contenu
+    </a>
+    <Header />
+    <main id="contenu" class="pb-24 lg:pb-0">
+      <slot />
+    </main>
+    <Footer />
+    <MobileCta />
+
+    <!-- Révélation au défilement (amélioration progressive, respecte prefers-reduced-motion) -->
+    <script is:inline>
+      document.documentElement.classList.add('js');
+      (() => {
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const items = document.querySelectorAll('.reveal');
+        if (reduce || !('IntersectionObserver' in window)) {
+          items.forEach((el) => el.classList.add('is-visible'));
+          return;
+        }
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.1 }
+        );
+        items.forEach((el) => io.observe(el));
+      })();
+    </script>
+  </body>
+</html>
