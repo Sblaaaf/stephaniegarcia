@@ -3,7 +3,6 @@
 Site vitrine statique, orienté SEO local et performance.
 
 - **Stack** : [Astro 7](https://astro.build) (statique, ~0 JS) + [Tailwind CSS 4](https://tailwindcss.com)
-- **Polices** : Fraunces (titres) + Inter (texte), auto-hébergées (RGPD, perf)
 - **Domaine** : https://stephaniegarcia.fr
 
 ## Développement
@@ -21,7 +20,7 @@ Tout est centralisé dans **`src/data/site.ts`** :
 
 | Champ | Statut |
 |---|---|
-| `resalibUrl` | ⚠️ **Remplacer par l'URL Resalib exacte** de la praticienne |
+| `resalibUrl` | URL Resalib de la Stéphanie Garcia | A Faire !
 | `umami.websiteId` | Renseigner pour activer la mesure d'audience Umami (sinon désactivée) |
 | `address.lat` / `lng` | Coordonnées approximatives de Bouaye — à affiner si besoin |
 

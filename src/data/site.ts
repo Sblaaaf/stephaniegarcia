@@ -6,7 +6,7 @@
 export const site = {
   name: 'Stéphanie Garcia',
   role: 'Réflexologue plantaire',
-  tagline: 'Réflexologue plantaire à Bouaye — méthode Ingham',
+  tagline: 'Réflexologue plantaire à Bouaye',
   domain: 'https://stephaniegarcia.fr',
 
   // Coordonnées
