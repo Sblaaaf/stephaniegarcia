@@ -6,7 +6,7 @@ export const publics = [
     icon: 'baby',
     title: 'Nourrissons & bébés',
     intro:
-      'Un toucher extrêmement doux et des séances courtes, adaptées à la sensibilité du tout-petit.',
+      'Une approche extrêmement douce et des séances courtes, adaptées à la sensibilité du tout-petit.',
     indications: [
       'Coliques du nourrisson',
       'Reflux gastro-œsophagien (RGO)',
@@ -26,7 +26,7 @@ export const publics = [
       'Gestion des émotions et hyperactivité',
       'Troubles de la concentration',
       'Anxiété scolaire',
-      'Préparation au Brevet ou au Baccalauréat',
+      'Préparation aux examens d’étude (brevet, baccalauréat)',
     ],
   },
   {
@@ -39,6 +39,7 @@ export const publics = [
       'Stress professionnel, burn-out, charge mentale',
       'Troubles du sommeil',
       'Douleurs chroniques (arthrose, rhumatismes)',
+      'Accompagnement de la grossesse, à partir de la 15ᵉ semaine d’aménorrhée',
       'Maintien de l’autonomie et de la mobilité',
       'Problèmes digestifs',
     ],
@@ -62,11 +63,11 @@ export const publics = [
     icon: 'accessibility',
     title: 'Personnes en situation de handicap',
     intro:
-      'Un accueil pensé pour un public souvent délaissé, avec une adaptation du cadre, du rythme et du toucher.',
+      'Un accueil pensé pour un public souvent délaissé, avec une adaptation du cadre, du rythme et du contact.',
     indications: [
       'Adaptation de l’accès et du cadre physique',
       'Patience et respect du rythme de chacun',
-      'Toucher ajusté à la sensibilité neurologique',
+      'Contact ajusté à la sensibilité neurologique',
       'Accompagnement bienveillant et sécurisant',
     ],
   },
@@ -86,7 +87,7 @@ export const seance = [
   {
     n: 3,
     title: 'La prise de contact',
-    text: 'Des mouvements de relaxation échauffent les tissus, détendent les chevilles et le diaphragme, et installent une relation de confiance par le toucher.',
+    text: 'Des mouvements de relaxation échauffent les tissus, détendent les chevilles et le diaphragme, et installent une relation de confiance par une approche attentive.',
   },
   {
     n: 4,

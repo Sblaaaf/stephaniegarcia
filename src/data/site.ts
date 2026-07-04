@@ -26,8 +26,8 @@ export const site = {
     lng: -1.6813,
   },
 
-  // Prise de rendez-vous — REMPLACER par l'URL Resalib exacte de la praticienne
-  resalibUrl: 'https://www.resalib.fr/praticien/stephanie-garcia',
+  // Prise de rendez-vous — page Resalib de la praticienne
+  resalibUrl: 'https://www.resalib.fr/praticien/122766-stephanie-garcia-reflexologue-bouaye',
 
   // Analytics Umami — à renseigner (id + URL du script) pour activer le suivi
   umami: {

@@ -7,15 +7,15 @@ import PageHeader from '../components/PageHeader.astro';
 import Icon from '../components/Icon.astro';
 import { site } from '../data/site';
 import ecap from '../assets/ecap-nantes.png';
-import ffper from '../assets/ffper.jpg';
+import altersoin from '../assets/altersoin-pour-tous-44.jpg';
 
 const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: site.name,
   jobTitle: 'Réflexologue plantaire',
-  description: 'Réflexologue plantaire certifiée, méthode Ingham, membre de la FFPER, exerçant à Bouaye.',
-  memberOf: { '@type': 'Organization', name: 'FFPER — Fédération Francophone des Praticiens et Enseignants en Réflexologie' },
+  description: 'Réflexologue plantaire certifiée, méthode Ingham, exerçant à Bouaye. Praticienne bénévole à AlterSoin pour Tous 44.',
+  memberOf: { '@type': 'Organization', name: 'AlterSoin pour Tous 44' },
   address: {
     '@type': 'PostalAddress',
     streetAddress: site.address.street,
@@ -27,16 +27,16 @@ const personSchema = {
 };
 
 const valeurs = [
-  ['Douceur', 'Un toucher enveloppant et rassurant, salué par tous ses patients, des nourrissons aux séniors.'],
+  ['Douceur', 'Une approche enveloppante et rassurante, saluée par tous ses consultants, des nourrissons aux séniors.'],
   ['Écoute', 'Chaque séance commence par un vrai temps d’échange pour comprendre vos besoins.'],
   ['Inclusion', 'Un accueil pensé pour tous, y compris les publics souvent délaissés en situation de handicap.'],
-  ['Rigueur', 'La stricte lignée de la méthode Ingham et le cadre déontologique de la FFPER.'],
+  ['Rigueur', 'La stricte lignée de la méthode Ingham et un cadre déontologique rigoureux.'],
 ];
 ---
 
 <Layout
   title="À propos de Stéphanie Garcia — Réflexologue plantaire à Bouaye"
-  description="Réflexologue plantaire certifiée et membre de la FFPER, Stéphanie Garcia pratique la méthode Ingham à Bouaye. Découvrez son approche, ses valeurs et son engagement pour un accompagnement bienveillant et inclusif."
+  description="Réflexologue plantaire certifiée, Stéphanie Garcia pratique la méthode Ingham à Bouaye et est praticienne bénévole à AlterSoin pour Tous 44. Découvrez son approche, ses valeurs et son engagement pour un accompagnement bienveillant et inclusif."
   schema={personSchema}
 >
   <PageHeader
@@ -46,7 +46,15 @@ const valeurs = [
   />
 
   <Section bg="cream">
-    <div class="mx-auto max-w-3xl">
+    <div class="mx-auto grid max-w-4xl items-start gap-10 md:grid-cols-[0.8fr_1.2fr]">
+      <!-- Portrait (placeholder en attendant la photo de Stéphanie) -->
+      <figure class="reveal mx-auto w-full max-w-xs md:sticky md:top-24">
+        <div class="flex aspect-[4/5] items-center justify-center rounded-3xl border border-dashed border-jade-300 bg-sand/60 text-jade-600">
+          <Icon name="user" size={72} stroke={1.4} />
+        </div>
+        <figcaption class="mt-3 text-center text-xs text-ink-soft">Photo de Stéphanie à venir</figcaption>
+      </figure>
+
       <div class="prose-reflexo space-y-5 text-lg leading-relaxed text-ink-soft">
         <p>
           Installée à Bouaye, aux portes de Nantes et du lac de Grand-Lieu, Stéphanie Garcia
@@ -96,20 +104,13 @@ const valeurs = [
           </span>
           <h2 class="mt-4 font-display text-2xl text-ink">Une formation solide, une pratique encadrée</h2>
           <p class="mt-3 leading-relaxed text-ink-soft">
-            Formée au centre <strong class="text-ink">ECAP de Nantes</strong> et membre de la
-            <strong class="text-ink">FFPER</strong> — Fédération Francophone des Praticiens et
-            Enseignants en Réflexologie —, Stéphanie exerce dans un cadre validé par des examens
-            d’anatomie et de physiologie, le respect du secret professionnel et une hygiène
-            irréprochable du cabinet et du matériel.
+            Formée au centre <strong class="text-ink">ECAP de Nantes</strong>, Stéphanie exerce
+            dans un cadre validé par des examens d’anatomie et de physiologie, le respect du
+            secret professionnel et une hygiène irréprochable du cabinet et du matériel.
           </p>
         </div>
-        <div class="flex flex-col gap-4">
-          <div class="flex items-center justify-center rounded-2xl border border-sand bg-cream/50 p-6">
-            <Image src={ecap} alt="ECAP de Nantes — centre de formation en réflexologie" class="h-14 w-auto" widths={[200, 320]} />
-          </div>
-          <div class="flex items-center justify-center rounded-2xl border border-sand bg-cream/50 p-6">
-            <Image src={ffper} alt="Fédération Francophone des Praticiens et Enseignants en Réflexologie" class="h-12 w-auto" widths={[240, 400]} />
-          </div>
+        <div class="flex items-center justify-center rounded-2xl border border-sand bg-cream/50 p-8">
+          <Image src={ecap} alt="ECAP de Nantes — centre de formation en réflexologie" class="h-16 w-auto" widths={[200, 320]} />
         </div>
       </div>
       <div class="border-t border-sand px-8 py-6 text-center sm:px-10">
@@ -117,6 +118,39 @@ const valeurs = [
           Prendre rendez-vous
           <Icon name="arrow-right" size={18} class="transition-transform duration-300 group-hover/btn:translate-x-1" />
         </Button>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Engagement solidaire — AlterSoin pour Tous 44 -->
+  <Section bg="white" width="narrow">
+    <div class="reveal grid items-center gap-8 rounded-3xl border border-sand bg-cream/50 p-8 sm:p-10 md:grid-cols-[1fr_1.6fr]">
+      <a
+        href="https://www.helloasso.com/associations/altersoin-pour-tous-44"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center justify-center rounded-2xl border border-sand bg-white p-6 transition-shadow hover:shadow-md hover:shadow-jade-900/5"
+        aria-label="AlterSoin pour Tous 44 (nouvel onglet)"
+      >
+        <Image src={altersoin} alt="Logo de l’association AlterSoin pour Tous 44" class="h-28 w-auto" widths={[220, 360]} />
+      </a>
+      <div>
+        <span class="inline-flex items-center gap-2 rounded-full bg-clay-100 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-clay-600">
+          <Icon name="heart-handshake" size={15} />
+          Engagement solidaire
+        </span>
+        <h2 class="mt-3 font-display text-2xl text-ink">Praticienne bénévole depuis 2019</h2>
+        <p class="mt-3 leading-relaxed text-ink-soft">
+          Depuis 2019, Stéphanie Garcia est praticienne bénévole
+          à <strong class="text-ink">AlterSoin pour Tous 44</strong>, un centre de soins
+          solidaires nantais qui rend les thérapies complémentaires — réflexologie,
+          ostéopathie, sophrologie, soutien psychologique — accessibles aux personnes
+          fragilisées par leur situation économique, sociale ou de santé.
+        </p>
+        <p class="mt-3 leading-relaxed text-ink-soft">
+          Chaque mois, elle y offre des séances de réflexologie plantaire, dans le même
+          esprit de bienveillance et d’inclusion qui guide toute sa pratique.
+        </p>
       </div>
     </div>
   </Section>
